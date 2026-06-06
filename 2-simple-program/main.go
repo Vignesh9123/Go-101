@@ -13,6 +13,10 @@ type order struct{
 	createdAt time.Time
 }
 
+func (ord *order) changeStatus(status string) {
+	ord.status = status
+}
+
 func changeByRef(o *order){
 	o.status = "approved"
 }
@@ -68,6 +72,11 @@ func main(){
 	fmt.Println(orders)
 
 	pendingOrders := findPendingOrders(orders)
+	
+	
+	fmt.Println("Pending", len(pendingOrders),"/",len(orders),"orders", pendingOrders)
+	orders[2].changeStatus("approved")
+	pendingOrders = findPendingOrders(orders)
 
 	fmt.Println("Pending", len(pendingOrders),"/",len(orders),"orders", pendingOrders)
 }
